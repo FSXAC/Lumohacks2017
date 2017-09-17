@@ -15,4 +15,12 @@
         android:layout_marginTop="75dp"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="74dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/ic_fast_forward_black_24dp" />
 </android.support.constraint.ConstraintLayout>
