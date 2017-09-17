@@ -115,15 +115,17 @@ public class SleepSummary extends AppCompatActivity {
                     System.out.println(questionNumber[0]);
                     hours[questionNumber[0]-1] = ((TimePicker)findViewById(R.id.timePicker)).getCurrentHour();
                     minutes[questionNumber[0]-1] = ((TimePicker)findViewById(R.id.timePicker)).getCurrentMinute();
-                    System.out.println(hours[questionNumber[0]]+":"+minutes[questionNumber[0]]);
+                    System.out.println(hours[questionNumber[0]-1]+":"+minutes[questionNumber[0]-1]);
                     timeAwake[questionNumber[0]-1] = ((NumberPicker)findViewById(R.id.wakePicker)).getValue();
                     timeHours[questionNumber[0]-1] = ((NumberPicker)findViewById(R.id.hourPicker)).getValue();
                     timeMinutes[questionNumber[0]-1] = ((NumberPicker)findViewById(R.id.minutePicker)).getValue();
                     //System.out.println(timeAwake[questionNumber[0]]);
                 }
-                else{
+               else{
+
                     comments[0] = ((EditText)findViewById(R.id.additionalComments)).getText().toString();
-                }
+
+               }
                 System.out.println(comments[0]);
                 /*String s = ""+((TextView)findViewById(R.id.numbers)).getText().charAt(0);
                 char set;
