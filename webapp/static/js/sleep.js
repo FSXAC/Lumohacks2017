@@ -41,13 +41,10 @@ View.prototype.init = function(user) {
 };
 
 View.prototype.updateUser = function(user) {
+    console.log(user);
 
     // Update name
-    var displayName = user.displayName;
-    if (displayName.length == 0) {
-        displayName = 'sleepy head';
-    }
-    $('#s_name').html(user.displayName.split(" ")[0]);
+    $('#s_name').html(user.displayName.split(' ')[0]);
 
     // Get UID
 

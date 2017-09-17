@@ -1,3 +1,5 @@
+var flag_newUser;
+
 window.onload = function() {
 
     initFirebase();
@@ -11,10 +13,6 @@ window.onload = function() {
 
         // Validation
         $w.hide();
-        if ($n.val().length < 1) {
-            $w.show();
-            $w.find('p').html('Please enter your FULL name');
-        }
         if (!validateEmail($e.val())) {
             $w.show();
             $w.find('p').html('Email is not valid');
@@ -43,7 +41,9 @@ window.onload = function() {
         var password = str($p.val());
 
         if (firebase != undefined) {
-            firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+            firebase.auth().createUserWithEmailAndPassword(email, password).then(function() {
+                flag_newUser = true;
+            }).catch(function(error) {
                 var errorCode = error.code;
                 var errorMessage = error.message;
 
@@ -94,13 +94,23 @@ window.onload = function() {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             // User is signed in.
-            user.updateProfile({
-                displayName: str($('#regName').val())
-            }).then(function() {
-                console.log('name change success');
-            }).catch(function(e) {
-                console.log('creating error');
-            });
+
+            if (flag_newUser) {
+                console.log('new user created')
+                var newUserName = str($('#regName').val());
+                if (newUserName == null || newUserName.length < 1) {
+                    newUserName = 'Sleepy-Head';
+                }
+
+                user.updateProfile({
+                    displayName: newUserName
+                }).then(function() {
+                    console.log('name change success');
+                }).catch(function(e) {
+                    console.log('creating error');
+                });
+                flag_newUser = false;
+            }
 
             // Change to logged in page
             window.location = '/sleep';
