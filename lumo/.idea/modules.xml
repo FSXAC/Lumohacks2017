@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LumoHacks2017.iml" filepath="$PROJECT_DIR$/LumoHacks2017.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lumo.iml" filepath="$PROJECT_DIR$/lumo.iml" />
     </modules>
   </component>
 </project>

@@ -55,12 +55,12 @@ public class DailyActivity extends AppCompatActivity implements View.OnClickList
         }
 
         if(v == submitBtn) {
-            submitUserInfo();
+            //submitUserInfo();
         }
 
     }
 
-    private void submitUserInfo() {
+   /* private void submitUserInfo() {
 
         String hoursOfSleep = editTextHoursSlept.getText().toString().trim();
 
@@ -72,5 +72,5 @@ public class DailyActivity extends AppCompatActivity implements View.OnClickList
 
         Toast.makeText(this, "Information Saved", Toast.LENGTH_SHORT).show();
 
-    }
+    }*/
 }
