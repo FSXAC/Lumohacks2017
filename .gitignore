@@ -1,5 +1,5 @@
 #Heroku
-venv
+env
 *.pyc
 staticfiles
 .env
