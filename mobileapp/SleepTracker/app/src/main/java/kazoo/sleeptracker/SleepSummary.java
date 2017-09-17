@@ -1,5 +1,6 @@
 package kazoo.sleeptracker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,18 +16,29 @@ import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class SleepSummary extends AppCompatActivity {
     int MAX = 8;
+
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseReference;
+
     @Override
-
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sleep_summary);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
 
         final String[] question = new String[8];
 
@@ -121,10 +133,23 @@ public class SleepSummary extends AppCompatActivity {
                     timeHours[questionNumber[0]-1] = ((NumberPicker)findViewById(R.id.hourPicker)).getValue();
                     timeMinutes[questionNumber[0]-1] = ((NumberPicker)findViewById(R.id.minutePicker)).getValue();
                     //System.out.println(timeAwake[questionNumber[0]]);
+
+                    if(questionNumber[0]==7){
+                        ((FloatingActionButton)findViewById(R.id.next)).setImageResource((R.drawable.ic_done_black_24dp));
+                    }
                 }
                else{
 
                     comments[0] = ((EditText)findViewById(R.id.additionalComments)).getText().toString();
+
+
+                    //Send all data to server here
+                    //submitInfo (hours[1]);
+
+                    //hours[]
+                    Toast.makeText(SleepSummary.this, "Sumbitted Successfully", Toast.LENGTH_SHORT).show();
+
+                    returnToMain(view);
 
                }
                 System.out.println(comments[0]);
@@ -137,6 +162,7 @@ public class SleepSummary extends AppCompatActivity {
         prev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ((FloatingActionButton)findViewById(R.id.next)).setImageResource((R.drawable.ic_fast_forward_black_24dp));
                 hours[questionNumber[0]] = ((TimePicker)findViewById(R.id.timePicker)).getCurrentHour();
                 minutes[questionNumber[0]] = ((TimePicker)findViewById(R.id.timePicker)).getCurrentMinute();
                 timeAwake[questionNumber[0]] = ((NumberPicker)findViewById(R.id.wakePicker)).getValue();
@@ -189,6 +215,11 @@ public class SleepSummary extends AppCompatActivity {
         });
     }
 
+    public void returnToMain(View view){
+        Intent intent = new Intent(this, Landingpage.class);
+        startActivity(intent);
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -222,4 +253,12 @@ public class SleepSummary extends AppCompatActivity {
         Questions[7] = "Additional Comments (Optional)";                //String
 
     }
+
+  /*  public void submitInfo (int timeHour){
+        UserInformation userInformation = new UserInformation(timeHour);
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        databaseReference.child(user.getUid()).setValue(userInformation);
+
+    }*/
 }
