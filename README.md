@@ -2,6 +2,8 @@
 
 September 16, 2017
 
+**Team**: Nishat Gupta, Muchen He, Chistel Nicholas, Andrew Yan, 
+
 ## Hacking Sleeping Disorder
 
 Some nice description here.
@@ -12,6 +14,4 @@ Good description here
 
 ### Webapp
 
-[Demo](webapp)
-
-### Hardware
+[Demo](https://glacial-stream-85429.herokuapp.com)
