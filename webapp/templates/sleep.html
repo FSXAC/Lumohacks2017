@@ -37,7 +37,7 @@
                 <li role="presentation"><a href="#">Thing 3</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li role="presentation"><a data-toggle="modal" data-target="#loginModal" href="#"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add entry</a></li>
+                <li role="presentation"><a data-toggle="modal" data-target="#entryModal" href="#"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add entry</a></li>
                 <li role="presentation"><a id="logoutButton" href="#"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</a></li>
             </ul>
         </div>
@@ -46,7 +46,7 @@
 <div id="main_content_box" class="s_content">
 </div>
 
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal">
+<div class="modal fade" id="entryModal" tabindex="-1" role="dialog" aria-labelledby="entryModal">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -54,29 +54,22 @@
                 <h4 class="modal-title" id="myModalLabel">New sleep entry</h4>
             </div>
             <div class="modal-body">
-                <div id="loginWarning" class="alert alert-danger" style="display: none"><p></p></div>
-
-                
-
-
-
+                <div id="newEntryWarning" class="alert alert-danger" style="display: none"><p></p></div>
     
                 <span>Bed time</span>
                 <input type="time" id="newEntry-time" class="form-control" required autofocus>
 
-
                 <span>Attempted bed time</span>
                 <input type="time" id="newEntry-trime" class="form-control" required>
 
-
-                <span>Time took to fall asleep</span>
-                <input type="range" id="newEntry-drag" class="form-control" required>
+                <span>Time took to fall asleep (<span id=newEntry-drag-pre>15</span> minutes)</span>
+                <input type="range" id="newEntry-drag" class="form-control" required min=0 max=100 step=5 defaultValue=15>
 
                 <span>Interruptions</span>
-                <input type="number" id="newEntry-inter" class="form-control" required>
+                <input type="number" id="newEntry-inter" class="form-control" required min=0 max=99 defaultValue=0>
 
-                <span>Duration</span>
-                <input type="range" id="newEntry-duration" class="form-control" required>
+                <span>Duration (<span id="newEntry-duration-pre">7</span> hours)</span>
+                <input type="range" id="newEntry-duration" class="form-control" required min=1 max=20 step=0.5 defaultValue=7>
 
                 <span>Time of awakening</span>
                 <input type="time" id="newEntry-awake" class="form-control" required>
@@ -88,13 +81,11 @@
                 <span>Additional comments</span>
                 <input type="text" id="newEntry-comments" class="form-control" placeholder="Sick, overtime, hungry, emotion, etc." required>
 
-
-
                 <i id="loginSpinner" class="fa fa-spinner fa-spin" style="width:100%; text-align: center; font-size:5em; display:none"></i>
             </div>
             <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
-                <button type="button" data-dismiss="modal" id="saveEntryButton" class="btn btn-primary">Save</button>
+                <button type="button" id="saveEntryButton" class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>
