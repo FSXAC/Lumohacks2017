@@ -35,6 +35,16 @@ View.prototype.init = function() {
 };
 
 window.onload = function() {
+
+    // Access firebase
+    initFirebase();
+    var database = firebase.database();
+
+    // test reading data
+    // var k = database.ref('/users/').once('value').then(function(snapshot) {
+    //     console.log(snapshot.val());
+    // });
+
     view = new View();
     view.init();
 }
@@ -47,4 +57,16 @@ function getFormattedTime() {
     var sec = g_date.getSeconds();
     return (hours < 10 ? '0' : '') + hours + ':' +
            (min < 10 ? '0' : '') + min;
+}
+
+function initFirebase() {
+    var config = {
+        apiKey: "AIzaSyCpukNeAZkRMjv9wisVzrDTDr1oLq2dklk",
+        authDomain: "lumohacks2017.firebaseapp.com",
+        databaseURL: "https://lumohacks2017.firebaseio.com",
+        projectId: "lumohacks2017",
+        storageBucket: "lumohacks2017.appspot.com",
+        messagingSenderId: "1069429648890"
+    };
+    firebase.initializeApp(config);
 }

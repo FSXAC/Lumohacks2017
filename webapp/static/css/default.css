@@ -1,3 +1,21 @@
+body {
+	padding-top: 50px;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
+}
+h1, h2, h3, h4, h5 {
+	font-weight: 300;
+}
+.navbar-inverse {
+	background-color: #235;
+	border-bottom: 1px solid #456;
+}
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+	background-color: #123;
+}
+.navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover {
+	background-color: #123;
+}
 .s_navbar {
 	width: 100%;
 	position: absolute;
@@ -37,7 +55,7 @@
 	width: 100%;
 	top: 0;
 	left: 0;
-	background: #ECE;
+	background: #024;
 }
 .s_page-home {
 	width: 100%;
@@ -45,6 +63,9 @@
 	text-align: center;
 }
 .s_page-home > h1 {
-	margin: 50px 0;
+	color: white;
 	font-size: 5em;
+}
+.s_page-home > h2 {
+	color: white;
 }

@@ -4,34 +4,45 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-database.js"></script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="static/css/default.css">
 
     <script>
         g_py_name = '{{py_name}}';
+        g_py_apikey = '{{py_apikey}}';
     </script>
 </head>
 <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" >
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapsable" aria-expanded="false">
+                <span class="sr-only">Toggle Nav</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Slapp</a>
+            </div>
+            <div class="collapse navbar-collapse" id="nav-collapsable">
+                <ul class="nav navbar-nav">
+                    <li role="presentation" class="active"><a href="#index">Overview</a></li>
+                    <li role="presentation"><a href="#">Thing 1</a></li>
+                    <li role="presentation"><a href="#">Thing 2</a></li>
+                    <li role="presentation"><a href="#">Thing 3</a></li>
+                    <li role="presentation"><a href="/">Log out</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div id="main_content_box" class="s_content">
-    </div>
-    <div class="s_navbar">
-        <div class="col-xs-2">
-            <div class="s_navbtn"><a href="#">Test</a></div>
-        </div>
-        <div class="col-xs-2">
-            <div class="s_navbtn"><a href="#">Test</a></div>
-        </div>
-        <div class="col-xs-4">
-            <div class="s_navbtn"><a href="#">Test</a></div>
-        </div>
-        <div class="col-xs-2">
-            <div class="s_navbtn"><a href="#">Test</a></div>
-        </div>
-        <div class="col-xs-2">
-            <div class="s_navbtn"><a href="#">Test</a></div>
-        </div>
     </div>
     <script src="static/js/main.js"></script>
 </body>
