@@ -8,20 +8,21 @@ function View() {
         HOME: '\
             <div class="s_page-home">\
                 <h1 id="s_home-time">{{time}}</h1>\
-                <h2>Welcome back {{name}}</h2>\
+                <h2>Welcome back <span id="s_name">{{name}}</span></h2>\
             </div>',
     }
     Mustache.parse(this.TEMPLATES.HOME);
 }
 
-View.prototype.init = function() {
+View.prototype.init = function(user) {
     this.$c = $('#main_content_box');
 
     var homeProp = {
         time: getFormattedTime(),
-        name: g_py_name
+        name: ''
     };
 
+    // render template
     var html = Mustache.render(this.TEMPLATES.HOME, homeProp);
     this.$c.html(html); 
 
@@ -35,13 +36,29 @@ View.prototype.init = function() {
 
     // Set handler for logging out
     $('#logoutButton').on('click', function() {
-        if (firebase != undefined) {
-            firebase.auth().signOut().then(function() {
-                console.log('Sign out success')
-            }).catch(function(error) {
-                console.log(error);
-            });
-        }
+        
+    });
+};
+
+View.prototype.updateUser = function(user) {
+
+    // Update name
+    var displayName = user.displayName;
+    if (displayName.length == 0) {
+        displayName = 'sleepy head';
+    }
+    $('#s_name').html(user.displayName.split(" ")[0]);
+
+    // Get UID
+
+
+    // Access data base
+
+};
+
+View.prototype.setLogoutHandler = function(handler) {
+    $('#logoutButton').on('click', function(e) {
+        handler(e);
     });
 };
 
@@ -53,6 +70,25 @@ window.onload = function() {
 
     view = new View();
     view.init();
+
+    // Bind handlers
+    // Bind logout to sign out
+    view.setLogoutHandler(function() {
+        firebase.auth().signOut().then(function() {
+            console.log('Sign out success');
+        }).catch(function(error) {
+            console.log(error);
+        });
+    });
+
+    // Bind update
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            view.updateUser(user);
+        } else {
+            window.location = '/';
+        }
+    });
 }
 
 // Utility functions
@@ -75,10 +111,4 @@ function initFirebase() {
         messagingSenderId: "1069429648890"
     };
     firebase.initializeApp(config);
-
-    firebase.auth().onAuthStateChanged(function(user) {
-        if (!user) {
-            window.location.href = '/';
-        }
-    });
 }
