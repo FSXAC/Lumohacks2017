@@ -1,7 +1,15 @@
 from flask import Flask
+from flask import render_template
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-	return '<h1>Hello from Slapp!</h1>'
+    return render_template('home.html')
+
+@app.route('/<name>')
+def indexNamed(name):
+    return render_template('home.html', py_name = name)
+
+if __name__ == "__main__":
+    app.run(debug=True)
