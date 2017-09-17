@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_sleep_summary"
+    tools:context="kazoo.sleeptracker.SleepSummary">
+
+    <TextView
+        android:id="@+id/questions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:paddingTop="25dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:text="What time did you get into bed?"
+        android:textSize = "25dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp" />
+
+    <TextView
+        android:id="@+id/timesAwake"
+        android:text="times"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="200dp"
+        android:paddingTop="270dp"
+        android:textSize="25dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp"
+        android:visibility="gone"/>
+    <TextView
+        android:id="@+id/hourText"
+        android:text="hours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="200dp"
+        android:paddingTop="170dp"
+        android:textSize="25dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/minuteText"
+        android:text="minutes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="200dp"
+        android:paddingTop="370dp"
+        android:textSize="25dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp"
+        android:visibility="gone"/>
+
+    <EditText
+        android:id="@+id/additionalComments"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:inputType="textMultiLine"
+        android:gravity="top|left"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:paddingTop="150dp"
+        android:background="@android:color/transparent"
+        android:maxLines="10"
+        android:maxLength="150"
+        tools:layout_editor_absoluteY="200dp"
+        tools:layout_editor_absoluteX="8dp"
+        android:visibility="gone"/>
+
+
+
+</android.support.constraint.ConstraintLayout>
