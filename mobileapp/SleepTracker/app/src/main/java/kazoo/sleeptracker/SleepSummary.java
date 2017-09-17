@@ -1,5 +1,6 @@
 package kazoo.sleeptracker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,18 +16,29 @@ import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class SleepSummary extends AppCompatActivity {
     int MAX = 8;
+
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseReference;
+
     @Override
-
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sleep_summary);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
 
         final String[] question = new String[8];
 
@@ -69,13 +81,14 @@ public class SleepSummary extends AppCompatActivity {
         //question[1] = "What time did you try to go to sleep?";
         //final int questionNumber = 1;
        // final String question2 = "What time did you try to go to sleep?";
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.next);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 questionNumber[0] = questionNumber[0] + 1;
 
                 if(questionNumber[0] <= (MAX-1)) {
+                    ((FloatingActionButton)findViewById(R.id.back)).setVisibility(View.VISIBLE);
                     if((questionNumber[0]==2)|| (questionNumber[0]==3) || (questionNumber[0]==4) || (questionNumber[0]==7)){
                         ((TimePicker)findViewById(R.id.timePicker)).setVisibility(View.GONE);
 
@@ -120,37 +133,93 @@ public class SleepSummary extends AppCompatActivity {
                     timeHours[questionNumber[0]-1] = ((NumberPicker)findViewById(R.id.hourPicker)).getValue();
                     timeMinutes[questionNumber[0]-1] = ((NumberPicker)findViewById(R.id.minutePicker)).getValue();
                     //System.out.println(timeAwake[questionNumber[0]]);
+
+                    if(questionNumber[0]==7){
+                        ((FloatingActionButton)findViewById(R.id.next)).setImageResource((R.drawable.ic_done_black_24dp));
+                    }
                 }
                else{
 
                     comments[0] = ((EditText)findViewById(R.id.additionalComments)).getText().toString();
 
+
+                    //Send all data to server here
+                    //submitInfo (hours[1]);
+
+                    //hours[]
+                    Toast.makeText(SleepSummary.this, "Sumbitted Successfully", Toast.LENGTH_SHORT).show();
+
+                    returnToMain(view);
+
                }
                 System.out.println(comments[0]);
-                /*String s = ""+((TextView)findViewById(R.id.numbers)).getText().charAt(0);
-                char set;
-                int number = Integer.parseInt(s);
-                number--;
-                ((TextView)findViewById(R.id.questions)).setText(question[number]);
-                number+=2;
-                set = (char) number;
-                ((TextView)findViewById(R.id.numbers)).setText(set);
 
-               /* if(((TextView)findViewById(R.id.questions)).getText() == "What time did you get into bed?") {
-                    ((TextView)findViewById(R.id.questions)).setText(question[1]);
-                    number=1;
-                    //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                            //.setAction("Action", null).show();
-                }
-                else {
-                    ((TextView)findViewById(R.id.questions)).setText(question[number]);
-                }*/
 
 
             }
         });
+        FloatingActionButton prev = (FloatingActionButton) findViewById(R.id.back);
+        prev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((FloatingActionButton)findViewById(R.id.next)).setImageResource((R.drawable.ic_fast_forward_black_24dp));
+                hours[questionNumber[0]] = ((TimePicker)findViewById(R.id.timePicker)).getCurrentHour();
+                minutes[questionNumber[0]] = ((TimePicker)findViewById(R.id.timePicker)).getCurrentMinute();
+                timeAwake[questionNumber[0]] = ((NumberPicker)findViewById(R.id.wakePicker)).getValue();
+                timeHours[questionNumber[0]] = ((NumberPicker)findViewById(R.id.hourPicker)).getValue();
+                timeMinutes[questionNumber[0]] = ((NumberPicker)findViewById(R.id.minutePicker)).getValue();
+                if(questionNumber[0]==7){
+                    comments[0] = ((EditText)findViewById(R.id.additionalComments)).getText().toString();
+                }
+                questionNumber[0]=questionNumber[0]-1;
+                if(questionNumber[0]==0){
+                    ((FloatingActionButton)findViewById(R.id.back)).setVisibility(View.GONE);
+                }
+                if((questionNumber[0]==2)|| (questionNumber[0]==3) || (questionNumber[0]==4) || (questionNumber[0]==7)){
+                    ((TimePicker)findViewById(R.id.timePicker)).setVisibility(View.GONE);
+
+                }
+                else{
+                    ((TimePicker)findViewById(R.id.timePicker)).setVisibility(View.VISIBLE);
+                }
+
+                if(questionNumber[0]==3){
+                    ((NumberPicker)findViewById(R.id.wakePicker)).setVisibility(View.VISIBLE);
+                    ((TextView)findViewById(R.id.timesAwake)).setVisibility(View.VISIBLE);
+                }
+                else{
+                    ((NumberPicker)findViewById(R.id.wakePicker)).setVisibility(View.GONE);
+                    ((TextView)findViewById(R.id.timesAwake)).setVisibility(View.GONE);
+                }
+                if((questionNumber[0]==2)|| (questionNumber[0]==4)){
+                    ((NumberPicker)findViewById(R.id.hourPicker)).setVisibility(View.VISIBLE);
+                    ((TextView)findViewById(R.id.hourText)).setVisibility(View.VISIBLE);
+                    ((NumberPicker)findViewById(R.id.minutePicker)).setVisibility(View.VISIBLE);
+                    ((TextView)findViewById(R.id.minuteText)).setVisibility(View.VISIBLE);
+                }
+                else{
+                    ((NumberPicker)findViewById(R.id.hourPicker)).setVisibility(View.GONE);
+                    ((TextView)findViewById(R.id.hourText)).setVisibility(View.GONE);
+                    ((NumberPicker)findViewById(R.id.minutePicker)).setVisibility(View.GONE);
+                    ((TextView)findViewById(R.id.minuteText)).setVisibility(View.GONE);
+                }
+                if(questionNumber[0]==7){
+                    ((EditText)findViewById(R.id.additionalComments)).setVisibility(View.VISIBLE);
+                }
+                else{
+                    ((EditText)findViewById(R.id.additionalComments)).setVisibility(View.GONE);
+                }
+
+                ((TextView) findViewById(R.id.questions)).setText(question[questionNumber[0]]);
+            }
+        });
     }
 
+    public void returnToMain(View view){
+        Intent intent = new Intent(this, Landingpage.class);
+        startActivity(intent);
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -184,4 +253,12 @@ public class SleepSummary extends AppCompatActivity {
         Questions[7] = "Additional Comments (Optional)";                //String
 
     }
+
+  /*  public void submitInfo (int timeHour){
+        UserInformation userInformation = new UserInformation(timeHour);
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        databaseReference.child(user.getUid()).setValue(userInformation);
+
+    }*/
 }
