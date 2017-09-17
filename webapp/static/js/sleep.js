@@ -49,16 +49,40 @@ View.prototype.init = function(user) {
     var self = this;
     $('#saveEntryButton').on('click', function() {
         // send to server
+        g_date = new Date();
+        var bedtime = $("#newEntry-time").val().split(':');
+        var outBedtime = $('#newEntry-outtime').val().split(':');
+        var awake = $("#newEntry-awake").val().split(':');
+        var duration = $("#newEntry-duration").val();
+        var trytime = $("#newEntry-trime").val().split(':');
+        var presleep = $("#newEntry-drag").val();
+        var interrupt = $("#newEntry-inter").val();
         entry = {
-            time: g_date.time(),
-            bedtime: $("#newEntry-time").val(),
-            bedtime_try: $("#newEntry-trime").val(),
-            time_to_fall_asleep: $("#newEntry-drag").val(),
-            interrupts: $("#newEntry-inter").val(),
-            duration: $("#newEntry-duration").val(),
-            time_of_awaken: $("#newEntry-awake").val(),
-            out_of_bed_time: $("#newEntry-outtime").val(),
+            awakeHour: parseInt(awake[0]),
+            awakeMinute: parseInt(awake[1]),
+
             comments: $("#newEntry-comments").val(),
+
+            hourInBed: parseInt(bedtime[0]),
+            minuteInBed: parseInt(bedtime[1]),
+
+            hourOutBed: parseInt(outBedtime[0]),
+            minuteOutBed: parseInt(outBedtime[1]),
+
+            hourAsleep: Math.floor(duration),
+            minuteAsleep: (parseFloat(duration) - parseInt(duration)) * 60,
+
+            tryHour: parseInt(trytime[0]),
+            tryMinute: parseInt(trytime[1]),
+
+            preSleepHour: 0,
+            preSleepMinute: parseInt(presleep),
+
+            sleepInterrupt: parseInt(interrupt),
+
+            year: g_date.getFullYear(),
+            month: g_date.getMonth() + 1,
+            day: g_date.getDate(),
         }
 
         $w = $('#newEntryWarning');
