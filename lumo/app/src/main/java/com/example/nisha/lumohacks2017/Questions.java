@@ -23,12 +23,21 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Calendar;
+
 public class Questions extends AppCompatActivity {
 
     int MAX = 8;
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
+
+    final String[] comments = new String[1]; //Additional Comments
+    final Calendar c = Calendar.getInstance();
+
+    int month = c.get(Calendar.MONTH);
+    int day = c.get(Calendar.DAY_OF_MONTH);
+    int year = c.get(Calendar.YEAR);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +59,7 @@ public class Questions extends AppCompatActivity {
         final int[] timeHours = new int[8]; //How long hours
         final int[] timeMinutes = new int[8]; //How long minutes
 
-        final String[] comments = new String[1]; //Additional Comments
+
 
         //ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer> (this,android.R.layout.simple_spinner_dropdown_item,minSleep);
         //ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this,android.R.layout.simple_spinner_item, minS);
@@ -143,15 +152,30 @@ public class Questions extends AppCompatActivity {
                     comments[0] = ((EditText)findViewById(R.id.additionalComments)).getText().toString();
 
                     //Send all data to server here
-                    UserInformation userInformation = new UserInformation(hours[2]);
+                    int diff = hours[6]-hours[0];
+                    if(diff<0){
+                        diff = 24+diff;
+                    }
+                    diff*=60;
+                    int diffMin = minutes[6]-minutes[0];
+                    if(diffMin<0) {
+                        diffMin = 60+diffMin;
+                    }
+                    diff+=diffMin;
+                    int sleepmin = (timeHours[4]*60)+timeMinutes[4];
+                    int eff = 100*sleepmin/diff;
+
+
+                    UserInformation userInformation = new UserInformation(hours[0], minutes[0],hours[1],minutes[1],timeHours[2], timeMinutes[2], timeAwake[3],timeHours[4],timeMinutes[4],hours[5], minutes[5], hours[6], minutes[6], comments[0], diff, eff, month, day, year);
                     FirebaseUser user = firebaseAuth.getCurrentUser();
 
-                    databaseReference.child(user.getUid()).setValue(userInformation).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    DatabaseReference newKey = databaseReference.child("users").child(user.getUid()).child("sleep").push();
+                    newKey.setValue(userInformation).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()) {
                                 //hours[]
-                                Toast.makeText(Questions.this, "Sumbitted Successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Questions.this, "Submitted Successfully", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(Questions.this, "Did not submit. Please try again.", Toast.LENGTH_SHORT).show();
                             }
@@ -263,12 +287,12 @@ public class Questions extends AppCompatActivity {
 
     }
 
-      public void submitInfo (int timeHour){
+      /*public void submitInfo (int timeHour){
         UserInformation userInformation = new UserInformation(timeHour);
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         databaseReference.child(user.getUid()).setValue(userInformation);
 
-    }
+    }*/
 
 }
