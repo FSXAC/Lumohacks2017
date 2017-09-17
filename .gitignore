@@ -1,9 +1,3 @@
-#Heroku
-env
-*.pyc
-staticfiles
-.env
-
 #Logs
 logs
 *.log
