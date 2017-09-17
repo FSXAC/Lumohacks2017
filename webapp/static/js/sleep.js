@@ -37,7 +37,7 @@ View.prototype.init = function() {
     $('#logoutButton').on('click', function() {
         if (firebase != undefined) {
             firebase.auth().signOut().then(function() {
-                console.log('Sign out success')''
+                console.log('Sign out success')
             }).catch(function(error) {
                 console.log(error);
             });

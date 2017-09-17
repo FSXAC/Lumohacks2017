@@ -55,7 +55,7 @@ h1, h2, h3, h4, h5 {
 	width: 100%;
 	top: 0;
 	left: 0;
-	background: #024;
+	/*background: #024;*/
 }
 .s_page-home {
 	width: 100%;
@@ -65,10 +65,12 @@ h1, h2, h3, h4, h5 {
 .s_page-home > h1 {
 	color: white;
 	font-size: 5em;
+	margin-top: 1.5em;
 }
 .s_page-home > h2 {
 	color: white;
 }
+.s_canvas { z-index: -1; }
 .modal-content {
 	background-color: #235;
 }

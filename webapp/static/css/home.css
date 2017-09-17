@@ -1,0 +1,5 @@
+body { overflow: hidden; color: white;}
+.s_container { text-align: center }
+.s_container > section { padding: 1em; }
+.s_container > section { margin: 3em 0; }
+h1 { font-size: 6em; }

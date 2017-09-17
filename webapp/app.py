@@ -5,11 +5,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('unreg.html')
+    return render_template('home.html')
 
 @app.route('/sleep')
 def sleep():
-	return render_template('home.html')
+	return render_template('sleep.html')
 
 # @app.route('/<name>')
 # def indexNamed(name):
