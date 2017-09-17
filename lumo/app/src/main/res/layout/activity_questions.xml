@@ -45,7 +45,7 @@
         android:layout_marginLeft = "16dp"
         android:layout_marginRight = "16dp"
         android:layout_marginTop = "75dp"
-        android:numbersSelectorColor="?attr/colorPrimary" />
+       />
 
     <NumberPicker
         android:id="@+id/hourPicker"
