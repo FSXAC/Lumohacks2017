@@ -69,3 +69,9 @@ h1, h2, h3, h4, h5 {
 .s_page-home > h2 {
 	color: white;
 }
+.modal-content {
+	background-color: #235;
+}
+.modal-body > input {
+	margin: 0.25em 0;
+}
