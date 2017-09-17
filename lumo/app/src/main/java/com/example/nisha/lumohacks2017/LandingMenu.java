@@ -87,6 +87,8 @@ public class LandingMenu extends AppCompatActivity
 
         } else if (id == R.id.myCharts) {
             ((CalendarView)findViewById(R.id.calendar)).setVisibility(View.GONE);
+            finish();
+            startActivity(new Intent(getApplicationContext(), DailyActivity.class));
 
         } else if (id == R.id.logout) {
             ((CalendarView)findViewById(R.id.calendar)).setVisibility(View.GONE);
