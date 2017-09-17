@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1069429648890",
+    "firebase_url": "https://lumohacks2017.firebaseio.com",
+    "project_id": "lumohacks2017",
+    "storage_bucket": "lumohacks2017.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1069429648890:android:05b1d18ae305a0bb",
+        "android_client_info": {
+          "package_name": "com.example.nisha.lumohacks2017"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1069429648890-gggjab2r8jn3rcfatk9775trgbk84m6k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVCRym38IbOCXDSFTss4blIzD9Cfrjfd8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

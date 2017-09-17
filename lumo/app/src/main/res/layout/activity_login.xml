@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.nisha.lumohacks2017.LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextEmailSignin"
+            android:hint="Enter Email"
+            android:textAlignment="center"
+            android:layout_margin="15dp"
+            android:inputType="textEmailAddress"
+            android:typeface="monospace"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextPasswordSignin"
+            android:hint="Enter Password"
+            android:textAlignment="center"
+            android:layout_margin="15dp"
+            android:inputType="textPassword"
+            android:typeface="monospace"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/signinButton"
+            android:text="Sign In"
+            android:layout_margin="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="No account? Register here."
+            android:id="@+id/textviewRegister"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

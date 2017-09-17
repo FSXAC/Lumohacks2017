@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.nisha.lumohacks2017.Questions">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/ic_fast_forward_black_24dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/ic_fast_rewind_black_24dp"
+        android:visibility="gone"/>
+
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity ="center"
+        android:layout_marginLeft = "16dp"
+        android:layout_marginRight = "16dp"
+        android:layout_marginTop = "75dp"
+        android:numbersSelectorColor="?attr/colorPrimary" />
+
+    <NumberPicker
+        android:id="@+id/hourPicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft= "100dp"
+        android:layout_marginTop="150dp"
+        android:visibility="gone"
+        android:numbersSelectorColor="?attr/colorPrimary" />
+
+    <NumberPicker
+        android:id="@+id/minutePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft= "100dp"
+        android:layout_marginTop="350dp"
+        android:visibility="gone"
+        android:numbersSelectorColor="?attr/colorPrimary" />
+
+    <NumberPicker
+        android:id="@+id/wakePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft= "100dp"
+        android:layout_marginTop="250dp"
+        android:visibility="gone"
+        android:numbersSelectorColor="?attr/colorPrimary" />
+
+    <include layout="@layout/content_questions"
+        android:id="@+id/include3"/>
+
+</android.support.design.widget.CoordinatorLayout>
