@@ -32,6 +32,17 @@ View.prototype.init = function() {
     this.secondInterval = setInterval(function() {
         $('#s_home-time').html(getFormattedTime());
     }, 60000);
+
+    // Set handler for logging out
+    $('#logoutButton').on('click', function() {
+        if (firebase != undefined) {
+            firebase.auth().signOut().then(function() {
+                console.log('Sign out success')''
+            }).catch(function(error) {
+                console.log(error);
+            });
+        }
+    });
 };
 
 window.onload = function() {
@@ -39,11 +50,6 @@ window.onload = function() {
     // Access firebase
     initFirebase();
     var database = firebase.database();
-
-    // test reading data
-    // var k = database.ref('/users/').once('value').then(function(snapshot) {
-    //     console.log(snapshot.val());
-    // });
 
     view = new View();
     view.init();
@@ -69,4 +75,10 @@ function initFirebase() {
         messagingSenderId: "1069429648890"
     };
     firebase.initializeApp(config);
+
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (!user) {
+            window.location.href = '/';
+        }
+    });
 }
