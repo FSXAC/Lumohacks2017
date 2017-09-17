@@ -8,4 +8,11 @@
     tools:context="com.example.nisha.lumohacks2017.LandingMenu"
     tools:showIn="@layout/app_bar_landing_menu">
 
+    <CalendarView
+        android:id="@+id/calendar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="75dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="74dp" />
 </android.support.constraint.ConstraintLayout>

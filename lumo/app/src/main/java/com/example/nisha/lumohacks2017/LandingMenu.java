@@ -13,6 +13,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CalendarView;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LandingMenu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -24,14 +27,6 @@ public class LandingMenu extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startQuestions(view);
-            }
-        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -40,6 +35,8 @@ public class LandingMenu extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        ((CalendarView)findViewById(R.id.calendar)).setVisibility(View.GONE);
     }
 
     @Override
@@ -80,18 +77,22 @@ public class LandingMenu extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.home) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+            ((CalendarView)findViewById(R.id.calendar)).setVisibility(View.GONE);
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.calendarOption) {
+            ((CalendarView)findViewById(R.id.calendar)).setVisibility(View.VISIBLE);
 
-        } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.myCharts) {
+            ((CalendarView)findViewById(R.id.calendar)).setVisibility(View.GONE);
 
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.logout) {
+            ((CalendarView)findViewById(R.id.calendar)).setVisibility(View.GONE);
+            FirebaseAuth.getInstance().signOut();
+            finish();
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
