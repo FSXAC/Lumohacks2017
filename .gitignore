@@ -1,4 +1,10 @@
-# Logs
+#Heroku
+venv
+*.pyc
+staticfiles
+.env
+
+#Logs
 logs
 *.log
 npm-debug.log*
